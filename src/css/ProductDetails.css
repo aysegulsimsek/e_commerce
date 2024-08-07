@@ -1,0 +1,145 @@
+.title {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.description {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: rgb(49, 48, 48);
+}
+
+.details_card {
+    border: 1px solid #ddd;
+    padding: 3rem;
+    border-radius: 2rem;
+    box-shadow: 0 4px 6px rgb(0, 0, 0, 0.1);
+}
+
+.btn {
+    margin-top: 1rem;
+    padding: 1rem 1.5rem;
+    border-radius: 10px;
+    border: none;
+    background-color: #f37919;
+    color: #fff;
+    font-size: medium;
+    width: 70%;
+    cursor: pointer;
+    transition: all .3s;
+}
+
+.btn:hover {
+    background-color: #e06709;
+}
+
+.span {
+    background-color: #fff;
+    padding: 10px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    border: 1px solid #ddd;
+    box-shadow: 0 1px 8px 4px rgb(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+
+/* .span:hover::after {
+    content: 'Favorilere Ekle';
+    top: 60px;
+    left: 0px;
+    padding: 10px 0 10px 10px;
+    text-align: justify;
+    box-shadow: 0 1px 8px 4px rgb(0, 0, 0, 0.1);
+    font-size: small;
+    display: flex;
+    background-color: #fff;
+    width: 90px;
+    position: relative;
+    color: #f37919;
+} */
+
+.icon {
+    font-size: 30px;
+}
+
+.span:hover .icon {
+    color: #f37919;
+}
+
+.related_section {
+    margin: 2rem auto;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 0;
+    border-radius: 1rem;
+}
+
+.related_text {
+    font-size: 26px;
+    font-family: 'Times New Roman', Times, serif;
+    padding-bottom: 1rem;
+    /* color: #3e3d3d; */
+}
+
+.products_related {
+    border: #3e3d3d;
+    display: flex;
+}
+
+.product_related {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    margin: 0 3rem;
+    border-radius: 1rem;
+}
+
+.icon_related {
+    width: 50px;
+}
+
+.span_related {
+    background-color: #fff;
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    margin-left: 5px;
+    border: 1px solid #ddd;
+    box-shadow: 0 1px 8px 4px rgb(0, 0, 0, 0.1);
+    border-radius: 100%;
+    z-index: 3;
+    transition: all .6s;
+    cursor: pointer;
+}
+
+.span_related:hover {
+    color: #f37919;
+    scale: 105%;
+}
+
+.span_related:hover::after {
+    content: 'Favorilere Ekle';
+    top: 60px;
+    left: -20px;
+    padding: 10px 0 10px 10px;
+    text-align: justify;
+    box-shadow: 0 1px 8px 4px rgb(0, 0, 0, 0.1);
+    font-size: small;
+    display: flex;
+    background-color: #fff;
+    width: 90px;
+    position: absolute;
+}
+
+.related_img {
+    transition: all .6s;
+}
+
+.related_img:hover {
+    scale: 105%;
+}

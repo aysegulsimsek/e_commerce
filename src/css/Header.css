@@ -1,0 +1,27 @@
+.logo {
+    width: 60px;
+}
+
+.header {
+    background-color: rgb(235, 227, 216);
+    /* border-bottom: 1px solid #545454; */
+    box-shadow: 0 0 4px rgb(0, 0, 0, 0.1);
+    height: 80px;
+    padding: 0 2rem;
+    color: #363636;
+}
+
+.logo-text {
+    user-select: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.search-input {
+    border: none;
+    border-bottom: 1px solid lightgray;
+    padding: 5px 10px;
+    outline: none;
+    width: 15rem;
+}
