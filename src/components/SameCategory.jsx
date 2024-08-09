@@ -25,9 +25,9 @@ function SameCategory({ category, currentProductId }) {
     useEffect(() => {
         if (!category) return;
 
-        axios.get(`https://fakestoreapi.com/products/category/${category}`)
+        axios.get(`https://dummyjson.com/products/category/${category}`)
             .then((response) => {
-                const filteredProduct = response.data.filter((product) => product.id !== currentProductId);
+                const filteredProduct = response.data.products.filter((product) => product.id !== currentProductId);
                 setRelatedProducts(filteredProduct);
                 setLoading(false);
             })
@@ -102,7 +102,7 @@ function SameCategory({ category, currentProductId }) {
                             }}>
 
                                 <img onClick={() => { navigate("/product-details/" + product.id); }}
-                                    src={product.image}
+                                    src={product.images[0]}
                                     alt={product.title}
                                     style={{
                                         maxWidth: '100%',
@@ -113,6 +113,7 @@ function SameCategory({ category, currentProductId }) {
                                     className='related_img'
                                 />
                             </div>
+
                             <h4
                                 style={{
                                     fontSize: '.9rem',
@@ -122,17 +123,18 @@ function SameCategory({ category, currentProductId }) {
                                     fontWeight: 'lighter',
                                 }}
                             >
+                                <strong style={{ marginRight: '.5rem' }}> {product?.brand}</strong>
+
                                 {product.title}
                             </h4>
+
                             <div style={{ marginTop: '1rem' }}>
                                 <div style={{ display: 'flex', alignItems: 'center' }}>
                                     <p style={{ fontSize: '16px', marginRight: '.5rem' }}>
-                                        {product?.rating?.rate}{' '}
+                                        {product?.rating}{' '}
                                     </p>
-                                    <ProductRating rating={product?.rating?.rate} />
-                                    <p style={{ marginLeft: '.5rem', fontSize: '12px' }} className='rate_product'>
-                                        ( {product?.rating?.count}{' '})
-                                    </p>
+                                    <ProductRating rating={product?.rating} />
+                                    <small style={{ fontSize: '12px', marginLeft: '.5rem' }}>({product.availabilityStatus})</small>
                                 </div>
                             </div>
                             <p style={{ color: '#f37919', fontWeight: 'bold', fontSize: '18px', marginTop: '-10px' }}>
@@ -153,17 +155,24 @@ const ProductRating = ({ rating }) => {
     const fullStars = Math.floor(rating);
     const hasHalfStar = rating % 1 >= 0.5;
 
+    // Create full stars
     for (let i = 0; i < fullStars; i++) {
-        stars.push(<FontAwesomeIcon key={i} icon={faStar} color="gold" />);
+        stars.push(<FontAwesomeIcon key={`full-${i}`} icon={faStar} color="gold" />);
     }
 
+    // Add half star if applicable
     if (hasHalfStar) {
-        stars.push(<FontAwesomeIcon key={fullStars} icon={faStarHalfAlt} color="gold" />);
+        stars.push(
+            <FontAwesomeIcon key={`half-${fullStars}`} icon={faStarHalfAlt} color="gold" />
+        );
     }
 
-    const totalStars = 5;
+    // Fill the rest with empty stars
+    const totalStars = 5; // Assuming a 5-star rating system
     for (let i = stars.length; i < totalStars; i++) {
-        stars.push(<FontAwesomeIcon key={i} icon={faStarOutline} color="gold" />);
+        stars.push(
+            <FontAwesomeIcon key={`empty-${i}`} icon={faStarOutline} color="gold" />
+        );
     }
 
     return <span>{stars}</span>;

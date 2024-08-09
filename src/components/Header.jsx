@@ -4,6 +4,7 @@ import '../css/Header.css'
 import { CiShoppingBasket, CiUser } from "react-icons/ci";
 import { useNavigate } from 'react-router-dom';
 import logo from '../images/logo.webp';
+import Badge from '@mui/material/Badge';
 
 function Header() {
     const navigate = useNavigate();
@@ -16,7 +17,10 @@ function Header() {
 
             <div className='flex-row' style={{ gap: '10px', fontSize: '16px', cursor: 'pointer' }}>
                 <input className='search-input' type="text" placeholder='search...' />
-                <CiShoppingBasket style={{ fontSize: '30px' }} />
+
+                <Badge badgeContent={4} color="primary">
+                    <CiShoppingBasket style={{ fontSize: '30px' }} />
+                </Badge>
                 <div className='flex-row' style={{ fontSize: '28px' }}>
                     <CiUser />
                 </div>

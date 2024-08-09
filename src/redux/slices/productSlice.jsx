@@ -5,15 +5,18 @@ const initialState = {
     selectedProduct: {},
     loading: false
 }
-const BASE_URL = "https://fakestoreapi.com";
+const BASE_URL = "https://dummyjson.com";
 
 export const getAllProducts = createAsyncThunk("getAllProducts", async () => {
     const response = await axios.get(`${BASE_URL}/products`);
-    return response.data;
+    console.log(response)
+
+    return response.data.products;
 });
+
 export const getProductDetail = createAsyncThunk("getProductDetail", async (id) => {
     const response = await axios.get(`${BASE_URL}/products/${id}`);
-    return response.data;
+    return response.data.products;
 });
 
 

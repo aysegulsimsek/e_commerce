@@ -13,9 +13,13 @@ function ProductList() {
     return (
         <div className='flex-row' style={{ flexWrap: 'wrap', gap: '30px', marginTop: '20px' }}>
             {
-                products && products.map((product) => (
-                    <Product key={product.id} product={product} />
-                ))
+                products && products.length > 0 ? (
+                    products.map((product) => (
+                        <Product key={product.id} product={product} />
+                    ))
+                ) : (
+                    <div>No products available</div>
+                )
             }
         </div>
     )
