@@ -102,7 +102,7 @@ function SameCategory({ category, currentProductId }) {
                             }}>
 
                                 <img onClick={() => { navigate("/product-details/" + product.id); }}
-                                    src={product.images[0]}
+                                    src={product.thumbnail}
                                     alt={product.title}
                                     style={{
                                         maxWidth: '100%',

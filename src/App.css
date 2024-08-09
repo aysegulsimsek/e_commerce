@@ -17,3 +17,24 @@ body {
     align-items: center;
     justify-content: center;
 }
+
+.basket_section {
+    width: 500px;
+    height: 100%;
+    box-shadow: 0 0 8px rgba(237, 192, 103, 0.1);
+    border-radius: 1rem;
+    background-color: transparent;
+    margin-left: auto;
+}
+
+.basket_product_section {
+    width: 500px;
+    padding: .5rem;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    box-shadow: 0 0 8px rgba(237, 192, 103, 0.1);
+    background-color: transparent;
+    border-radius: 1rem;
+    margin-left: auto;
+}

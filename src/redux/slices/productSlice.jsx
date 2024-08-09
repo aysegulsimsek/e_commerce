@@ -9,7 +9,6 @@ const BASE_URL = "https://dummyjson.com";
 
 export const getAllProducts = createAsyncThunk("getAllProducts", async () => {
     const response = await axios.get(`${BASE_URL}/products`);
-    console.log(response)
 
     return response.data.products;
 });

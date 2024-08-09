@@ -66,13 +66,17 @@ function ProductDetails() {
         const payload = {
             id,
             price: productDetail.price,
-            image: productDetail.image,
+            thumbnail: productDetail.thumbnail,  // Eklediğiniz görüntünün ne olduğuna dikkat edin
             title: productDetail.title,
             description: productDetail.description,
+            shippingInformation: productDetail.shippingInformation,
             count
-        }
+        };
         dispatch(addToBasket(payload));
-    }
+    };
+
+
+
 
     if (loading || !productDetail) {
         return <Loading />;
@@ -93,8 +97,8 @@ function ProductDetails() {
                     }}
                 >
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: 'auto', marginBottom: 'auto' }}>
-                        {productDetail.images && productDetail.images.length > 0 && (
-                            <img src={productDetail.images[0]} alt={productDetail.title} width={300} />
+                        {productDetail.thumbnail && productDetail.thumbnail.length > 0 && (
+                            <img src={productDetail.thumbnail} alt={productDetail.title} width={300} />
                         )}
                     </div>
                     <div style={{ padding: '0 3rem' }}>
@@ -111,7 +115,13 @@ function ProductDetails() {
                                         <i> {ranking}. ürün </i>
                                     </div>
                                 )}
+
                             </div>
+
+                        </div>
+                        <div>
+                            <i>{productDetail.shippingInformation} </i>
+
                         </div>
                         <div style={{ display: 'flex', alignItems: 'center' }}>
                             <p>
