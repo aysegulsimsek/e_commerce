@@ -7,11 +7,19 @@ import logo from '../images/logo.webp';
 import Badge from '@mui/material/Badge';
 import { useDispatch, useSelector } from 'react-redux';
 import { setDrawer } from '../redux/slices/basketSlice';
+import { filterProducts } from '../redux/slices/productSlice';
 
 function Header() {
     const { products } = useSelector((store) => store.basket);
-    const navigate = useNavigate();
+    const [searchTerm, setSearchTerm] = useState('');
     const dispatch = useDispatch();
+
+    const handleSearchTerm = (e) => {
+        const value = e.target.value;
+        setSearchTerm(value);
+        dispatch(filterProducts(value)); // Dispatch the action to filter products
+    };
+    const navigate = useNavigate();
     return (
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }} className='header'>
             <div className=' flex-row' style={{ cursor: 'pointer' }} onClick={() => { navigate("/") }}>
@@ -20,7 +28,13 @@ function Header() {
             </div>
 
             <div className='flex-row' style={{ gap: '10px', fontSize: '16px', cursor: 'pointer' }}>
-                <input className='search-input' type="text" placeholder='search...' />
+                <input
+                    className='search-input'
+                    type="text"
+                    value={searchTerm}
+                    onChange={handleSearchTerm}
+                    placeholder='search...'
+                />
 
                 <Badge onClick={() => dispatch(setDrawer())} badgeContent={products.length} color="primary">
                     <CiShoppingBasket style={{ fontSize: '30px' }} />

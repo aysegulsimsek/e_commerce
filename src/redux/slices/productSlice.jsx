@@ -3,7 +3,8 @@ import axios from 'axios';
 const initialState = {
     products: [],
     selectedProduct: {},
-    loading: false
+    loading: false,
+    filteredProducts: []
 }
 const BASE_URL = "https://dummyjson.com";
 
@@ -32,7 +33,18 @@ export const productSlice = createSlice({
         },
         clearSelectedProduct: (state) => {
             state.selectedProduct = null;
-            state.loading = true; // Reset loading state
+            state.loading = true;
+        },
+        setProducts: (state, action) => {
+            state.products = action.payload;
+            state.filteredProducts = action.payload;
+        },
+        filterProducts: (state, action) => {
+            const searchTerm = action.payload.toLowerCase();
+            state.filteredProducts = state.products.filter((product) => {
+                const title = product.title ? product.title.toLowerCase() : '';
+                return title.includes(searchTerm);
+            });
         },
     },
     extraReducers: (builder) => {
@@ -42,12 +54,13 @@ export const productSlice = createSlice({
         builder.addCase(getAllProducts.fulfilled, (state, action) => {
             state.loading = false;
             state.products = action.payload;
+            state.filteredProducts = action.payload;
         })
 
 
     }
 });
-export const { setLoading, setSelectedProduct, clearSelectedProduct } = productSlice.actions
+export const { setLoading, setSelectedProduct, clearSelectedProduct, setProducts, filterProducts } = productSlice.actions
 
 
 export default productSlice.reducer

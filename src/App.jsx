@@ -7,13 +7,15 @@ import Loading from './components/Loading';
 import Drawer from '@mui/material/Drawer';
 import { useDispatch, useSelector } from 'react-redux';
 import { IoIosCloseCircleOutline } from "react-icons/io";
-import { setDrawer, calculateEstimatedDelivery } from './redux/slices/basketSlice';
+import { setDrawer, calculateEstimatedDelivery, removeFromBasket } from './redux/slices/basketSlice';
 import { useEffect } from 'react';
 
 
 function App() {
   const { products, drawer, estimatedDelivery } = useSelector((store) => store.basket);
   const dispatch = useDispatch();
+
+
 
   function calculateTotalPrice(price, count) {
     return price * count;
@@ -24,7 +26,9 @@ function App() {
     dispatch(calculateEstimatedDelivery());
   }, [products, dispatch]);
 
-
+  const handleRemoveFromBasket = (id) => {
+    dispatch(removeFromBasket({ id }));
+  }
 
 
   return (
@@ -33,8 +37,6 @@ function App() {
 
       <PageContainer>
         <Loading />
-
-
         <RouterConfig />
         <Drawer anchor='right' open={drawer} className='basket_section' sx={{ backgroundColor: 'transparent' }}>
           <div style={{ display: 'flex', marginTop: '1rem', alignItems: 'center', justifyContent: 'space-between', padding: '0 1rem' }}>
@@ -72,8 +74,10 @@ function App() {
                       <i>{calculateTotalPrice(product.price, product.count)} $</i>
                     </strong>
                   </td>
-                  <td style={{ width: '100px', padding: '8px', textAlign: 'center' }}>
+                  <td style={{ width: '100px', padding: '8px', textAlign: 'center' }}
+                  >
                     <button
+                      onClick={() => handleRemoveFromBasket(product.id)}
                       style={{
                         fontSize: '12px',
                         border: 'none',

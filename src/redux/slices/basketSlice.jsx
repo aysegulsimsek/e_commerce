@@ -1,5 +1,6 @@
 /* eslint-disable no-empty-pattern */
 import { createSlice } from '@reduxjs/toolkit'
+// import { useSelector } from 'react-redux';
 const getBasketFromStorage = () => {
     if (localStorage.getItem("basket")) {
         return JSON.parse(localStorage.getItem("basket"));
@@ -12,6 +13,8 @@ const initialState = {
     estimatedDelivery: '',
 
 }
+
+
 const writeFromBasketToStorage = (basket) => {
     localStorage.setItem("basket", JSON.stringify(basket));
 }
@@ -33,11 +36,6 @@ function getDeliveryTimeScore(deliveryTime) {
             return 0;
     }
 }
-
-
-
-
-
 export const basketSlice = createSlice({
     name: "basket",
     initialState,
@@ -52,6 +50,20 @@ export const basketSlice = createSlice({
                 state.products.push(action.payload);
             }
             writeFromBasketToStorage(state.products);
+        },
+        removeFromBasket: (state, action) => {
+            const findProduct = state.products.find(product => product.id === action.payload.id);
+            if (findProduct) {
+                if (findProduct.count > 1) {
+                    findProduct.count -= 1;
+                }
+                else {
+                    state.products = state.products.filter(product => product.id !== action.payload.id);
+                }
+                writeFromBasketToStorage(state.products);
+
+            }
+
         },
         setDrawer: (state) => {
             state.drawer = !state.drawer
@@ -81,7 +93,7 @@ export const basketSlice = createSlice({
     }
 })
 
-export const { addToBasket, setDrawer, calculateEstimatedDelivery } = basketSlice.actions
+export const { addToBasket, setDrawer, calculateEstimatedDelivery, removeFromBasket } = basketSlice.actions
 
 
 export default basketSlice.reducer

@@ -78,6 +78,7 @@ function ProductDetails() {
 
 
 
+
     if (loading || !productDetail) {
         return <Loading />;
     }

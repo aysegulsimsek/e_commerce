@@ -1,19 +1,28 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
+
 const initialState = {
-    loading: false
-}
+    products: [],
+    filteredProducts: []
+};
+
 export const appSlice = createSlice({
     name: "app",
     initialState,
     reducers: {
-
-    },
-    extraReducers: (builder) => {
-
+        setProduct: (state, action) => {
+            state.products = action.payload;
+            state.filteredProducts = action.payload;
+        },
+        filterProducts: (state, action) => {
+            const searchTerm = action.payload.toLowerCase();
+            state.filteredProducts = state.products.filter((product) => {
+                const title = product.title ? product.title.toLowerCase() : '';
+                return title.includes(searchTerm);
+            });
+        }
     }
-})
-export const { } = appSlice.actions
+});
 
-export default appSlice.reducer
+export const { setProduct, filterProducts } = appSlice.actions;
 
-
+export default appSlice.reducer;
